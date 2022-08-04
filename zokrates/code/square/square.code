@@ -1,0 +1,3 @@
+def main(private field input0, field input1) -> (field):
+  field result = if input0 * input0 == input1 then 1 else 0 fi
+  return result
