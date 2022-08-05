@@ -169,6 +169,7 @@ contract ERC721 is Pausable, ERC165 {
 
     //    @dev Approves another address to transfer the given token ID
     function approve(address to, uint256 tokenId) public {
+        address owner = ownerOf(tokenId);
         // TODO require the given address to not be the owner of the tokenId
         require(owner != to, "address to not be the owner of the tokenId ");
         // TODO require the msg sender to be the owner of the contract or isApprovedForAll() to be true
@@ -575,7 +576,7 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
     // TODO: Create an internal function to set the tokenURI of a specified tokenId
     function _setTokenURI(uint256 tokenId) internal {
         require(_exists(tokenId), "Token doesn't exist");
-        _tokenURIs[tokenId] = usingOraclize.strConcat(_baseTokenURI, usingOraclize.uint2str(tokenId));
+        _tokenURIs[tokenId] = usingOraclize.strConcat(_baseTokenURI, usingOraclize.uint2str(tokenId),"","","");
     }
     // It should be the _baseTokenURI + the tokenId in string form
     // TIP #1: use strConcat() from the imported oraclizeAPI lib to set the complete token URI
@@ -594,9 +595,8 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 //      -returns a true boolean upon completion of the function
 //      -calls the superclass mint and setTokenURI functions
 contract DUCDA10Contract is ERC721Metadata("DUCDA10Token", "DUCDA10", "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/") {
-    function mint(address to, uint256 tokenId, string tokenURI) public onlyOwner returns (bool) {
+    function mint(address to, uint256 tokenId) public onlyOwner returns (bool) {
         super._mint(to, tokenId);
-        super._setTokenURI(tokenURI);
         return true;
     }
 }

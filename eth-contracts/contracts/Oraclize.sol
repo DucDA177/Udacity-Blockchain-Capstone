@@ -24,18 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
-pragma solidity >= 0.5.5; // Incompatible compiler version - please select a compiler within the stated pragma range, or use a different version of the oraclizeAPI!
+pragma solidity >= 0.5.0; // Incompatible compiler version - please select a compiler within the stated pragma range, or use a different version of the oraclizeAPI!
 
 // Dummy contract only used to emit to end-user they are using wrong solc
 contract solcChecker {
-/* INCOMPATIBLE SOLC: import the following instead: "github.com/oraclize/ethereum-api/oraclizeAPI_0.4.sol" */ function f(bytes1 calldata x) external;
+/* INCOMPATIBLE SOLC: import the following instead: "github.com/oraclize/ethereum-api/oraclizeAPI_0.4.sol" */ function f(bytes calldata x) external;
 }
 
 contract OraclizeI {
 
     address public cbAddress;
 
-    function setProofType(bytes1 _proofType) external;
+    function setProofType(byte _proofType) external;
     function setCustomGasPrice(uint _gasPrice) external;
     function getPrice(string memory _datasource) public returns (uint _dsprice);
     function randomDS_getSessionPubKeyHash() external view returns (bytes32 _sessionKeyHash);

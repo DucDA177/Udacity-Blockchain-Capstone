@@ -1,8 +1,10 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 // TODO define a contract call to the zokrates generated solidity contract <Verifier> or <renamedVerifier>
+import "./ERC721Mintable.sol";
+import "./verifier.sol";
 
-contract SquareVerifier is ZokratesVerifier { }
+contract SquareVerifier is Verifier { }
 
 // TODO define another contract named SolnSquareVerifier that inherits from your ERC721Mintable class
 contract SolnSquareVerifier is DUCDA10Contract{
@@ -30,9 +32,9 @@ struct Solution {
 
         bytes32 solutionHash = keccak256(abi.encodePacked(input[0], input[1]));
 
-        solutions[solutionHash] = Solution(solutionCount, msg.sender, false);
+        solutions[solutionHash] = Solution(solutionCount, msg.sender);
 
-        emit SolutionAdded(solutionCount, msg.sender);
+        emit AddedSolution(solutionCount, msg.sender);
         solutionCount++;
     }
 
